@@ -13,7 +13,12 @@ class Order(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     status=models.CharField(max_length=10,choices=StatusChoices.choices,default=StatusChoices.PENDING)
     products=models.ManyToManyField(Product,through="OrderItem",related_name="orders")
-    
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def update_total_price(self):
+        total = sum(item.item_subtotal for item in self.items.all())
+        self.total_price = total
+        self.save()
     def __str__(self):
         return f"Order {self.order_id} created by {self.user.username}"
     

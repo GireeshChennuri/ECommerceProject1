@@ -1,16 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-# class OrderAdmin(admin.ModelAdmin):
-#     list_display=('order_id','user','created_at','status','items')
-# admin.site.register(Order,OrderAdmin)
-
-
-# class OrderItemAdmin(admin.ModelAdmin):
-#     list_display=('order','product','quantity')
-# admin.site.register(OrderItem,OrderItemAdmin)
-
-
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
